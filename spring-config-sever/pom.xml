@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.UmmahsKitchen</groupId>
-	<artifactId>Discovery-Server</artifactId>
+	<artifactId>spring-config-sever</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	<name>Discovery-Server</name>
-	<description>Demo project for Spring Boot</description>
+	<packaging>war</packaging>
+	<name>spring-config-sever</name>
+	<description>config server for my aplication</description>
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>2021.0.5</spring-cloud.version>
@@ -29,7 +29,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			<artifactId>spring-cloud-config-server</artifactId>
 		</dependency>
 
 		<dependency>

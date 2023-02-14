@@ -1,0 +1,26 @@
+server:
+   port: 8082
+
+spring:
+   application:
+      name: menu-service
+   data:
+      mongodb:
+        database: ummahs-kitchen
+        host: ummahskitchendb
+        port: 27017
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka/
+    registry-fetch-interval-seconds: 5
+    registerWithEureka: true
+    fetchRegistry: true
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'

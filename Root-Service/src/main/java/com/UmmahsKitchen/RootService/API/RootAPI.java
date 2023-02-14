@@ -28,9 +28,9 @@ public class RootAPI {
 	@GetMapping("/")
 	public String plainRequest() {
 		logger.info("Reached API!!!");
-		String result = restTemplate.getForObject("http://menu-service/menu-internal/",String.class);
+//		String result = restTemplate.getForObject("http://menu-service/menu-internal/",String.class);
 		
-		return result;  
+		return "Reached root and it has been registered";  
 	}
 	
 	@PostMapping(value = "/insert-all-menu-items")

@@ -1,0 +1,60 @@
+version: '3.9'
+services:
+    discovery-server:
+        container_name: discovery-server
+        build: ./Discovery-Server
+        restart: on-failure
+        ports:
+          - 8761:8761
+        networks:
+          - service-discovery-network
+    ummahskitchendb:
+        image: mongo:3.6
+        container_name: ummahskitchendb
+        # Below I have added ./data a folder inside the root folder of the Directory
+        # this will make sure the DB is mounted to an folder inside the host machine and secures the data
+        # when multiple containers are aded or deleted
+        volumes:
+           - ./data:/data/db
+        ports:
+          - 27017:27017
+        networks:
+          - service-discovery-network
+    root-service:
+        depends_on:
+            - discovery-server
+        container_name: rootservice
+        build: ./Root-Service
+        restart: on-failure
+        ports:
+          - "8081:8081"
+        networks:
+          - service-discovery-network
+    menuservice:
+        build: ./Menu-Service
+        container_name: menuservice
+        restart: on-failure
+        ports:
+          - 8082:8082
+        depends_on:
+          - ummahskitchendb
+          - discovery-server
+        networks:
+          - service-discovery-network
+    userservice:
+        build: ./User-Service
+        container_name: userservice
+        restart: always
+        ports:
+          - 8083:8083
+        depends_on:
+          - ummahskitchendb
+          - discovery-server
+        networks:
+          - service-discovery-network
+          
+networks:
+  service-discovery-network:
+    name: service-discovery-network
+    attachable: true
+    driver: bridge
