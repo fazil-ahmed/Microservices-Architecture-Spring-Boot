@@ -2,16 +2,27 @@ server:
   port: 8081
 spring:
   application:
-    name: root-service
+    name: api-gateway
+  cloud:
+     gateway:
+        discovery:
+           locator:
+              enabled: true
+              lowerCaseService: true
+        routes:
+        - id: menu-service
+          uri: lb://MENU-SERVICE
+          predicates:
+           - Path=/menu-service/**
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+           - Path=/user-service/**
+        
 eureka:
+  instance:
+     prefer-ip-address: true
+     hostname: localhost
   client:
     service-url:
-      defaultZone: http://discovery-server:8761/eureka/
-management:
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      exposure:
-        include: '*'    
+      defaultZone: http://discovery-server:8761/eureka/      
