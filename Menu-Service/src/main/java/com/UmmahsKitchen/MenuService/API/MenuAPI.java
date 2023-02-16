@@ -18,7 +18,7 @@ import com.UmmahsKitchen.MenuService.VO.MenuItemsVO;
 
 
 @RestController
-@RequestMapping("/menu-internal")	
+@RequestMapping("/menu-service")	
 public class MenuAPI {
 	
 	@Autowired
@@ -29,20 +29,48 @@ public class MenuAPI {
 	
 	final static Logger logger = Logger.getLogger(MenuAPI.class);
 	
+	/**
+	 * @return
+	 * health check of services API
+	 */
 	@GetMapping("/")
 	public String plainRequest() {
 		logger.info("Reached API internally from root!!!");
 		return restTemplate.getForObject("http://user-service/user-internal/", String.class);
 	}
 	
-	@GetMapping("/get-all-items")
+	@PostMapping(value = "/insert-all-menu-items")
+	public String insertAllMenuItems(@RequestBody final List<MenuItemsVO> items) {
+		menuService.insertAllMenuItems(items);
+		return "Added Successfully";
+	}
+	
+	@GetMapping(value = "/get-all-menu-items")
 	public List<MenuItemsVO> getAllMenuItems() {
 		return menuService.getAllItems();
 	}
 	
-	@PostMapping(value = "/insert-all-items")
-	public String insertAllMenuItems(@RequestBody final List<MenuItemsVO> items) {
-		menuService.insertAllMenuItems(items);
-		return "Added sucessfully";
-	}
+	/**
+	 * @return
+	 * This API was implemented to establish internal communication 
+	 * from root service to menu service but now I am commenting this API
+	 * and bring the API from root service to here and making root service as API gateway
+	 */
+//	@GetMapping("/get-all-items")
+//	public List<MenuItemsVO> getAllMenuItems() {
+//		return menuService.getAllItems();
+//	}
+	
+	/**
+	 * @param items
+	 * This API was implemented to establish internal communication 
+	 * from root service to menu service but now I am commenting this API
+	 * and bring the API from root service to here and making root service as API gateway
+	 * @return
+	 */
+//	@PostMapping(value = "/insert-all-items")
+//	public String insertAllMenuItems(@RequestBody final List<MenuItemsVO> items) {
+//		menuService.insertAllMenuItems(items);
+//		return "Added sucessfully";
+//	}
 }

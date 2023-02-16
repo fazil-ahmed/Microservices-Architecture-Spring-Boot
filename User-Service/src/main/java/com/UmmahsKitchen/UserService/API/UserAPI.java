@@ -1,6 +1,5 @@
 package com.UmmahsKitchen.UserService.API;
 
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import com.UmmahsKitchen.UserService.Service.UserService;
 import com.UmmahsKitchen.UserService.VO.UsersVO;
 
 @RestController
-@RequestMapping("/user-internal")
+@RequestMapping("/user-service")
 public class UserAPI {
 	
 	@Autowired
@@ -30,13 +29,23 @@ public class UserAPI {
 		return EMPLOYEE_ENDPOINTS_RUNNING;
 	}
 	
-	@PostMapping("/insert")
-	public UsersVO insertuser(@RequestBody final UsersVO user) {
+	@PostMapping(value = "/insert-user")
+	public UsersVO insertUser(@RequestBody final UsersVO user) {
 		return userService.addNewUser(user);
 	}
 	
-	@GetMapping(value = "/get")
+	@GetMapping(value = "/get-user")
 	public UsersVO getUser(@RequestParam(name="id") final String userId) {
 		return userService.getUser(userId);
 	}
+	
+	/**
+	 * @param userId
+	 * @return commenting this API and bring API from root-service since
+	 * I am converting it into API-gateway
+	 */
+//	@GetMapping(value = "/get")
+//	public UsersVO getUser(@RequestParam(name="id") final String userId) {
+//		return userService.getUser(userId);
+//	}
 }
