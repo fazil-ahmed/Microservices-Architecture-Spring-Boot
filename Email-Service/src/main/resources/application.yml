@@ -1,0 +1,35 @@
+server:
+   port: 8084
+
+spring:
+   application:
+      name: email-service
+   mail:
+      host: email-smtp.us-east-1.amazonaws.com
+      username: AKIA3MR6VNYNXPFMLUX5
+      password: BN9YT9J4fMikvTZG4gigMJ9v9u93rsS8M6+UXrtlmYdI
+      properties:
+         mail:
+            transport:
+               protocol: smtp
+            smtp:
+               port: 587
+               auth: true
+               starttls:
+                  enabled: true
+                  required: true
+
+from:
+   email:
+      address: fazil1997ca@gmail.com
+      
+eureka:
+  instance:
+     prefer-ip-address: true
+     hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    registry-fetch-interval-seconds: 5
+    registerWithEureka: true
+    fetchRegistry: true
