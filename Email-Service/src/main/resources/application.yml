@@ -6,8 +6,8 @@ spring:
       name: email-service
    mail:
       host: email-smtp.us-east-1.amazonaws.com
-      username: AKIA3MR6VNYNXPFMLUX5
-      password: BN9YT9J4fMikvTZG4gigMJ9v9u93rsS8M6+UXrtlmYdI
+      username: ""
+      password: ""
       properties:
          mail:
             transport:
